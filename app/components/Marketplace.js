@@ -1,615 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { courses as mockCourses, tutors as mockTutors, categories } from '../data/mockData';
 
-const mockSubjects = [
-  {
-    id: 1,
-    name: 'Complete Mathematics Mastery',
-    grade: 'Year 8',
-    lessons: 25,
-    price: 29.99,
-    rating: 4.8,
-    reviews: 234,
-    image: '📐',
-    duration: '15.5 hours',
-    provider: 'rightsteps',
-    providerName: 'Rightsteps',
-    instructor: 'Dr. Sarah Mitchell',
-    badges: ['trending', 'popular'],
-    enrollments: 1245,
-    completionRate: 94,
-    difficulty: 'Beginner',
-    lastUpdated: 'October 2024',
-    description: 'Master essential mathematics concepts with interactive lessons and real-world applications.',
-    learningPoints: ['Algebra fundamentals', 'Geometry principles', 'Problem-solving strategies']
-  },
-  {
-    id: 2,
-    name: 'Science Fundamentals',
-    grade: 'Year 8',
-    lessons: 30,
-    price: 34.99,
-    rating: 4.9,
-    reviews: 189,
-    image: '🔬',
-    duration: '22 hours',
-    provider: 'rightsteps',
-    providerName: 'Rightsteps',
-    instructor: 'Prof. James Chen',
-    badges: ['most-loved', 'bestseller'],
-    enrollments: 987,
-    completionRate: 98,
-    difficulty: 'Beginner',
-    lastUpdated: 'October 2024',
-    description: 'Comprehensive science course covering biology, chemistry, and physics concepts.',
-    learningPoints: ['Scientific method', 'Lab techniques', 'Critical thinking']
-  },
-  {
-    id: 3,
-    name: 'English Language Excellence',
-    grade: 'Year 8',
-    lessons: 20,
-    price: 24.99,
-    rating: 4.7,
-    reviews: 156,
-    image: '📚',
-    duration: '12 hours',
-    provider: 'external',
-    providerName: 'Learn Plus Academy',
-    instructor: 'Emma Thompson',
-    badges: ['new'],
-    enrollments: 432,
-    completionRate: 87,
-    difficulty: 'Beginner',
-    lastUpdated: 'October 2024',
-    description: 'Improve reading comprehension, writing skills, and grammar mastery.',
-    learningPoints: ['Grammar rules', 'Essay writing', 'Literature analysis']
-  },
-  {
-    id: 4,
-    name: 'Advanced Mathematics',
-    grade: 'Year 9',
-    lessons: 28,
-    price: 32.99,
-    rating: 4.8,
-    reviews: 201,
-    image: '📐',
-    duration: '18 hours',
-    provider: 'rightsteps',
-    providerName: 'Rightsteps',
-    instructor: 'Dr. Sarah Mitchell',
-    badges: ['popular'],
-    enrollments: 756,
-    completionRate: 91,
-    difficulty: 'Intermediate',
-    lastUpdated: 'September 2024',
-    description: 'Build on foundational maths with advanced topics and complex problem solving.',
-    learningPoints: ['Advanced algebra', 'Trigonometry basics', 'Functions and graphs']
-  },
-  {
-    id: 5,
-    name: 'GCSE Physics Preparation',
-    grade: 'Year 10',
-    lessons: 22,
-    price: 39.99,
-    rating: 4.9,
-    reviews: 167,
-    image: '⚛️',
-    duration: '25 hours',
-    provider: 'external',
-    providerName: 'Physics Masters',
-    instructor: 'Dr. Michael Brown',
-    badges: ['most-loved'],
-    enrollments: 623,
-    completionRate: 89,
-    difficulty: 'Advanced',
-    lastUpdated: 'October 2024',
-    description: 'Complete GCSE physics preparation with exam techniques and practice questions.',
-    learningPoints: ['Forces and motion', 'Energy transfers', 'Electricity and magnetism']
-  },
-  {
-    id: 6,
-    name: 'Chemistry Essentials',
-    grade: 'Year 10',
-    lessons: 24,
-    price: 37.99,
-    rating: 4.6,
-    reviews: 143,
-    image: '🧪',
-    duration: '20 hours',
-    provider: 'external',
-    providerName: 'ChemWiz Education',
-    instructor: 'Dr. Lisa Wang',
-    badges: [],
-    enrollments: 289,
-    completionRate: 82,
-    difficulty: 'Intermediate',
-    lastUpdated: 'August 2024',
-    description: 'Explore chemical reactions, atomic structure, and the periodic table.',
-    learningPoints: ['Chemical bonding', 'Reactions', 'Practical skills']
-  },
-  {
-    id: 7,
-    name: 'Introduction to Algebra',
-    grade: 'Year 7',
-    lessons: 18,
-    price: 19.99,
-    rating: 4.5,
-    reviews: 98,
-    image: '📐',
-    duration: '9 hours',
-    provider: 'rightsteps',
-    providerName: 'Rightsteps',
-    instructor: 'Dr. Sarah Mitchell',
-    badges: ['new'],
-    enrollments: 234,
-    completionRate: 88,
-    difficulty: 'Beginner',
-    lastUpdated: 'November 2024',
-    description: 'Build a strong foundation in algebra for young learners.',
-    learningPoints: ['Basic equations', 'Variables', 'Simple expressions']
-  },
-  {
-    id: 8,
-    name: 'Biology for GCSE',
-    grade: 'Year 11',
-    lessons: 35,
-    price: 44.99,
-    rating: 4.9,
-    reviews: 312,
-    image: '🧬',
-    duration: '28 hours',
-    provider: 'rightsteps',
-    providerName: 'Rightsteps',
-    instructor: 'Prof. James Chen',
-    badges: ['bestseller', 'trending'],
-    enrollments: 1567,
-    completionRate: 96,
-    difficulty: 'Advanced',
-    lastUpdated: 'October 2024',
-    description: 'Complete GCSE Biology preparation with detailed explanations and exam practice.',
-    learningPoints: ['Cell biology', 'Genetics', 'Evolution', 'Ecology']
-  },
-  {
-    id: 9,
-    name: 'Creative Writing Workshop',
-    grade: 'Year 9',
-    lessons: 15,
-    price: 27.99,
-    rating: 4.7,
-    reviews: 87,
-    image: '✍️',
-    duration: '8 hours',
-    provider: 'external',
-    providerName: 'Write Bright',
-    instructor: 'Sophie Turner',
-    badges: ['popular'],
-    enrollments: 345,
-    completionRate: 85,
-    difficulty: 'Intermediate',
-    lastUpdated: 'September 2024',
-    description: 'Develop creative writing skills through engaging exercises and feedback.',
-    learningPoints: ['Storytelling', 'Character development', 'Descriptive writing']
-  },
-  {
-    id: 10,
-    name: 'GCSE Mathematics Higher',
-    grade: 'Year 11',
-    lessons: 40,
-    price: 49.99,
-    rating: 4.9,
-    reviews: 445,
-    image: '📐',
-    duration: '35 hours',
-    provider: 'rightsteps',
-    providerName: 'Rightsteps',
-    instructor: 'Dr. Sarah Mitchell',
-    badges: ['bestseller', 'most-loved'],
-    enrollments: 2134,
-    completionRate: 97,
-    difficulty: 'Advanced',
-    lastUpdated: 'October 2024',
-    description: 'Complete higher tier GCSE maths course with comprehensive exam preparation.',
-    learningPoints: ['Advanced algebra', 'Calculus introduction', 'Statistics', 'Trigonometry']
-  },
-  {
-    id: 11,
-    name: 'Shakespeare Studies',
-    grade: 'Year 10',
-    lessons: 12,
-    price: 22.99,
-    rating: 4.6,
-    reviews: 76,
-    image: '🎭',
-    duration: '6 hours',
-    provider: 'external',
-    providerName: 'Classic Literature Hub',
-    instructor: 'Michael Robertson',
-    badges: [],
-    enrollments: 198,
-    completionRate: 79,
-    difficulty: 'Intermediate',
-    lastUpdated: 'August 2024',
-    description: 'Deep dive into Shakespeare\'s works with analysis and interpretation.',
-    learningPoints: ['Literary analysis', 'Historical context', 'Language techniques']
-  },
-  {
-    id: 12,
-    name: 'Computer Science Basics',
-    grade: 'Year 8',
-    lessons: 22,
-    price: 31.99,
-    rating: 4.8,
-    reviews: 167,
-    image: '💻',
-    duration: '14 hours',
-    provider: 'rightsteps',
-    providerName: 'Rightsteps',
-    instructor: 'Dr. Alex Kumar',
-    badges: ['trending'],
-    enrollments: 678,
-    completionRate: 92,
-    difficulty: 'Beginner',
-    lastUpdated: 'November 2024',
-    description: 'Introduction to programming and computational thinking.',
-    learningPoints: ['Python basics', 'Algorithms', 'Problem solving']
-  },
-  {
-    id: 13,
-    name: 'French Language Foundation',
-    grade: 'Year 7',
-    lessons: 26,
-    price: 28.99,
-    rating: 4.5,
-    reviews: 112,
-    image: '🇫🇷',
-    duration: '16 hours',
-    provider: 'external',
-    providerName: 'Language Masters',
-    instructor: 'Marie Dubois',
-    badges: ['new'],
-    enrollments: 289,
-    completionRate: 84,
-    difficulty: 'Beginner',
-    lastUpdated: 'October 2024',
-    description: 'Learn French from scratch with interactive lessons.',
-    learningPoints: ['Basic vocabulary', 'Grammar', 'Pronunciation']
-  },
-  {
-    id: 14,
-    name: 'History: World War II',
-    grade: 'Year 9',
-    lessons: 18,
-    price: 26.99,
-    rating: 4.7,
-    reviews: 134,
-    image: '🌍',
-    duration: '11 hours',
-    provider: 'external',
-    providerName: 'History Academy',
-    instructor: 'Prof. David Williams',
-    badges: ['popular'],
-    enrollments: 456,
-    completionRate: 88,
-    difficulty: 'Intermediate',
-    lastUpdated: 'September 2024',
-    description: 'Comprehensive study of World War II events and impacts.',
-    learningPoints: ['Key events', 'Political analysis', 'Source evaluation']
-  },
-  {
-    id: 15,
-    name: 'A-Level Chemistry',
-    grade: 'Year 12',
-    lessons: 45,
-    price: 54.99,
-    rating: 4.9,
-    reviews: 267,
-    image: '🧪',
-    duration: '38 hours',
-    provider: 'rightsteps',
-    providerName: 'Rightsteps',
-    instructor: 'Dr. Lisa Wang',
-    badges: ['bestseller', 'most-loved'],
-    enrollments: 1234,
-    completionRate: 95,
-    difficulty: 'Advanced',
-    lastUpdated: 'October 2024',
-    description: 'Complete A-Level Chemistry course with practical and theoretical components.',
-    learningPoints: ['Organic chemistry', 'Physical chemistry', 'Analytical techniques']
-  },
-  {
-    id: 16,
-    name: 'Spanish for Beginners',
-    grade: 'Year 7',
-    lessons: 24,
-    price: 26.99,
-    rating: 4.6,
-    reviews: 145,
-    image: '🇪🇸',
-    duration: '15 hours',
-    provider: 'external',
-    providerName: 'Language Masters',
-    instructor: 'Carlos Martinez',
-    badges: [],
-    enrollments: 356,
-    completionRate: 86,
-    difficulty: 'Beginner',
-    lastUpdated: 'September 2024',
-    description: 'Start your Spanish journey with engaging lessons and practical exercises.',
-    learningPoints: ['Basic conversation', 'Grammar fundamentals', 'Cultural insights']
-  },
-  {
-    id: 17,
-    name: 'Geography: Physical World',
-    grade: 'Year 9',
-    lessons: 20,
-    price: 29.99,
-    rating: 4.7,
-    reviews: 102,
-    image: '🗺️',
-    duration: '13 hours',
-    provider: 'external',
-    providerName: 'Geography Hub',
-    instructor: 'Dr. Rachel Green',
-    badges: ['popular'],
-    enrollments: 423,
-    completionRate: 87,
-    difficulty: 'Intermediate',
-    lastUpdated: 'October 2024',
-    description: 'Explore Earth\'s physical features and natural processes.',
-    learningPoints: ['Landforms', 'Climate', 'Ecosystems']
-  },
-  {
-    id: 18,
-    name: 'A-Level Mathematics',
-    grade: 'Year 12',
-    lessons: 48,
-    price: 59.99,
-    rating: 4.9,
-    reviews: 389,
-    image: '📐',
-    duration: '42 hours',
-    provider: 'rightsteps',
-    providerName: 'Rightsteps',
-    instructor: 'Dr. Sarah Mitchell',
-    badges: ['bestseller', 'trending'],
-    enrollments: 1876,
-    completionRate: 96,
-    difficulty: 'Advanced',
-    lastUpdated: 'October 2024',
-    description: 'Complete A-Level Mathematics covering pure, mechanics, and statistics.',
-    learningPoints: ['Calculus', 'Mechanics', 'Statistics', 'Pure mathematics']
-  }
-];
-
-const categories = [
-  { name: 'All', count: 18, icon: '📚' },
-  { name: 'Mathematics', count: 5, icon: '📐' },
-  { name: 'Science', count: 5, icon: '🔬' },
-  { name: 'English', count: 3, icon: '📖' },
-];
-
-const mockTutors = [
-  {
-    id: 1,
-    name: 'Dr. Emily Thompson',
-    category: 'Mathematics',
-    specialization: ['Exam Preparation', 'Homework Help'],
-    experience: '8 years',
-    rating: 4.9,
-    reviews: 156,
-    hourlyRate: 25,
-    verified: true,
-    available: true,
-    photo: '👩‍🏫',
-    tagline: 'Mathematics Expert',
-    education: 'Ph.D. in Mathematics, University of Cambridge',
-    hoursTeaching: 500,
-    responseTime: '2 hours',
-    languages: ['English']
-  },
-  {
-    id: 2,
-    name: 'Prof. James Richardson',
-    category: 'Science',
-    specialization: ['Exam Preparation', 'Test Preparation'],
-    experience: '12 years',
-    rating: 4.8,
-    reviews: 203,
-    hourlyRate: 30,
-    verified: true,
-    available: false,
-    photo: '👨‍🏫',
-    tagline: 'Science Specialist',
-    education: 'M.Sc. Chemistry, University of Oxford',
-    hoursTeaching: 800,
-    responseTime: '1 hour',
-    languages: ['English', 'French']
-  },
-  {
-    id: 3,
-    name: 'Ms. Sarah Collins',
-    category: 'English',
-    specialization: ['Homework Help', 'Confidence Building'],
-    experience: '6 years',
-    rating: 4.7,
-    reviews: 98,
-    hourlyRate: 22,
-    verified: true,
-    available: true,
-    photo: '👩‍💼',
-    tagline: 'English Language Expert',
-    education: 'M.A. English Literature, King\'s College London',
-    hoursTeaching: 300,
-    responseTime: '30 minutes',
-    languages: ['English']
-  },
-  {
-    id: 4,
-    name: 'Mr. Oliver Davies',
-    category: 'Mathematics',
-    specialization: ['General Tutoring', 'Exam Preparation'],
-    experience: '5 years',
-    rating: 4.9,
-    reviews: 87,
-    hourlyRate: 28,
-    verified: true,
-    available: true,
-    photo: '👨‍💻',
-    tagline: 'Maths & Coding Mentor',
-    education: 'B.Sc. Computer Science, Imperial College London',
-    hoursTeaching: 250,
-    responseTime: '1 hour',
-    languages: ['English']
-  },
-  {
-    id: 5,
-    name: 'Dr. Amelia Watson',
-    category: 'Science',
-    specialization: ['Exam Preparation', 'General Tutoring'],
-    experience: '10 years',
-    rating: 4.8,
-    reviews: 178,
-    hourlyRate: 26,
-    verified: true,
-    available: true,
-    photo: '👩‍🎓',
-    tagline: 'Science Specialist',
-    education: 'Ph.D. in Biology, University of Edinburgh',
-    hoursTeaching: 650,
-    responseTime: '1 hour',
-    languages: ['English', 'German']
-  },
-  {
-    id: 6,
-    name: 'Mr. Benjamin Clarke',
-    category: 'English',
-    specialization: ['Confidence Building', 'General Tutoring'],
-    experience: '7 years',
-    rating: 4.6,
-    reviews: 134,
-    hourlyRate: 24,
-    verified: true,
-    available: true,
-    photo: '👨‍🏫',
-    tagline: 'English & Literature Expert',
-    education: 'M.A. English Literature, University of Manchester',
-    hoursTeaching: 420,
-    responseTime: '3 hours',
-    languages: ['English']
-  },
-  {
-    id: 7,
-    name: 'Ms. Charlotte Brown',
-    category: 'Science',
-    specialization: ['Exam Preparation', 'Test Preparation'],
-    experience: '4 years',
-    rating: 4.9,
-    reviews: 67,
-    hourlyRate: 27,
-    verified: true,
-    available: true,
-    photo: '👩‍🔬',
-    tagline: 'Physics Specialist',
-    education: 'M.Sc. Physics, University of Bristol',
-    hoursTeaching: 280,
-    responseTime: '2 hours',
-    languages: ['English']
-  },
-  {
-    id: 8,
-    name: 'Dr. Daniel Martinez',
-    category: 'Science',
-    specialization: ['Exam Preparation', 'Homework Help'],
-    experience: '15 years',
-    rating: 4.9,
-    reviews: 289,
-    hourlyRate: 32,
-    verified: true,
-    available: false,
-    photo: '👨‍🔬',
-    tagline: 'Chemistry Expert',
-    education: 'Ph.D. in Chemistry, University College London',
-    hoursTeaching: 950,
-    responseTime: '1 hour',
-    languages: ['English', 'Spanish']
-  },
-  {
-    id: 9,
-    name: 'Ms. Jessica Lee',
-    category: 'English',
-    specialization: ['Confidence Building', 'General Tutoring'],
-    experience: '6 years',
-    rating: 4.7,
-    reviews: 112,
-    hourlyRate: 23,
-    verified: true,
-    available: true,
-    photo: '👩‍🏫',
-    tagline: 'Creative English Teacher',
-    education: 'M.A. English & Drama, Royal Holloway',
-    hoursTeaching: 380,
-    responseTime: '30 minutes',
-    languages: ['English']
-  },
-  {
-    id: 10,
-    name: 'Mr. Thomas Wilson',
-    category: 'Science',
-    specialization: ['Test Preparation', 'Homework Help'],
-    experience: '9 years',
-    rating: 4.8,
-    reviews: 195,
-    hourlyRate: 29,
-    verified: true,
-    available: true,
-    photo: '👨‍🔬',
-    tagline: 'Biology Expert',
-    education: 'M.Sc. Biology, University of Warwick',
-    hoursTeaching: 570,
-    responseTime: '1 hour',
-    languages: ['English']
-  },
-  {
-    id: 11,
-    name: 'Ms. Rachel Green',
-    category: 'Mathematics',
-    specialization: ['Homework Help', 'Confidence Building'],
-    experience: '3 years',
-    rating: 4.5,
-    reviews: 54,
-    hourlyRate: 20,
-    verified: true,
-    available: true,
-    photo: '👩‍💼',
-    tagline: 'Maths Made Easy',
-    education: 'B.Sc. Mathematics, University of Birmingham',
-    hoursTeaching: 180,
-    responseTime: '2 hours',
-    languages: ['English']
-  },
-  {
-    id: 12,
-    name: 'Dr. Michael Foster',
-    category: 'Mathematics',
-    specialization: ['Exam Preparation', 'Test Preparation'],
-    experience: '11 years',
-    rating: 4.9,
-    reviews: 234,
-    hourlyRate: 35,
-    verified: true,
-    available: true,
-    photo: '👨‍💻',
-    tagline: 'Advanced Maths Expert',
-    education: 'Ph.D. Mathematics, UCL',
-    hoursTeaching: 720,
-    responseTime: '1 hour',
-    languages: ['English']
-  }
-];
-
-export default function ContentMarketplaceEnterprise({ onContentSelect, onTutorSelect }) {
+export default function Marketplace({ onContentSelect, onTutorSelect }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
@@ -628,18 +22,16 @@ export default function ContentMarketplaceEnterprise({ onContentSelect, onTutorS
   const [selectedPriceRanges, setSelectedPriceRanges] = useState([]);
 
   // Filter courses
-  const filteredSubjects = mockSubjects.filter(subject => {
-    const matchesSearch = subject.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-           subject.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'All' || subject.name.includes(selectedCategory);
+  const filteredCourses = mockCourses.filter(course => {
+    const matchesSearch = course.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+           course.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === 'All' || course.name.includes(selectedCategory);
 
-    // Rating filter
     const matchesRating = selectedRatings.length === 0 ||
-      selectedRatings.some(rating => subject.rating >= rating);
+      selectedRatings.some(rating => course.rating >= rating);
 
-    // Duration filter
     const matchesDuration = selectedDurations.length === 0 || selectedDurations.some(duration => {
-      const hours = parseFloat(subject.duration);
+      const hours = parseFloat(course.duration);
       if (duration === '0-1 Hour') return hours <= 1;
       if (duration === '1-3 Hours') return hours > 1 && hours <= 3;
       if (duration === '3-6 Hours') return hours > 3 && hours <= 6;
@@ -648,15 +40,13 @@ export default function ContentMarketplaceEnterprise({ onContentSelect, onTutorS
       return true;
     });
 
-    // Level filter
     const matchesLevel = selectedLevels.length === 0 ||
-      selectedLevels.includes(subject.difficulty) ||
+      selectedLevels.includes(course.difficulty) ||
       selectedLevels.includes('All Levels');
 
-    // Price filter
     const matchesPrice = selectedPriceTypes.length === 0 ||
-      (selectedPriceTypes.includes('Free') && subject.price === 0) ||
-      (selectedPriceTypes.includes('Paid') && subject.price > 0);
+      (selectedPriceTypes.includes('Free') && course.price === 0) ||
+      (selectedPriceTypes.includes('Paid') && course.price > 0);
 
     return matchesSearch && matchesCategory && matchesRating && matchesDuration && matchesLevel && matchesPrice;
   });
@@ -667,14 +57,11 @@ export default function ContentMarketplaceEnterprise({ onContentSelect, onTutorS
       tutor.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
       tutor.tagline.toLowerCase().includes(searchTerm.toLowerCase());
 
-    // Category filter (same as courses)
     const matchesCategory = selectedCategory === 'All' || tutor.category === selectedCategory;
 
-    // Specialization filter
     const matchesSpecialization = selectedSpecializations.length === 0 ||
       selectedSpecializations.some(spec => tutor.specialization.includes(spec));
 
-    // Experience filter
     const matchesExperience = selectedExperience.length === 0 || selectedExperience.some(exp => {
       const years = parseInt(tutor.experience);
       if (exp === '0-2 years') return years >= 0 && years <= 2;
@@ -683,11 +70,9 @@ export default function ContentMarketplaceEnterprise({ onContentSelect, onTutorS
       return true;
     });
 
-    // Rating filter (reusing course ratings filter)
     const matchesRating = selectedRatings.length === 0 ||
       selectedRatings.some(rating => tutor.rating >= rating);
 
-    // Price range filter for tutors
     const matchesPrice = selectedPriceRanges.length === 0 || selectedPriceRanges.some(range => {
       if (range === '£0-£20') return tutor.hourlyRate <= 20;
       if (range === '£20-£25') return tutor.hourlyRate > 20 && tutor.hourlyRate <= 25;
@@ -698,6 +83,10 @@ export default function ContentMarketplaceEnterprise({ onContentSelect, onTutorS
 
     return matchesSearch && matchesCategory && matchesSpecialization && matchesExperience && matchesRating && matchesPrice;
   });
+
+  // Get filtered items based on type selection
+  const displayCourses = selectedType === 'tutors' ? [] : filteredCourses;
+  const displayTutors = selectedType === 'courses' ? [] : filteredTutors;
 
   const handleContentClick = (content, action) => {
     if (onContentSelect) {
@@ -710,19 +99,6 @@ export default function ContentMarketplaceEnterprise({ onContentSelect, onTutorS
       onTutorSelect(tutor, action);
     }
   };
-
-  // Filter items based on type
-  const getFilteredItems = () => {
-    if (selectedType === 'courses') {
-      return { courses: filteredSubjects, tutors: [] };
-    } else if (selectedType === 'tutors') {
-      return { courses: [], tutors: filteredTutors };
-    } else {
-      return { courses: filteredSubjects, tutors: filteredTutors };
-    }
-  };
-
-  const { courses, tutors } = getFilteredItems();
 
   const toggleArrayFilter = (value, array, setArray) => {
     if (array.includes(value)) {
@@ -976,9 +352,9 @@ export default function ContentMarketplaceEnterprise({ onContentSelect, onTutorS
                     {selectedType === 'all' && 'Courses & Tutors'}
                   </h2>
                   <p className="text-sm text-gray-600 mt-1">
-                    {selectedType === 'courses' && `${courses.length} courses`}
-                    {selectedType === 'tutors' && `${tutors.length} tutors`}
-                    {selectedType === 'all' && `${courses.length} courses, ${tutors.length} tutors`}
+                    {selectedType === 'courses' && `${displayCourses.length} courses`}
+                    {selectedType === 'tutors' && `${displayTutors.length} tutors`}
+                    {selectedType === 'all' && `${displayCourses.length} courses, ${displayTutors.length} tutors`}
                   </p>
                 </div>
                 <div className="flex items-center gap-4">
@@ -1016,10 +392,10 @@ export default function ContentMarketplaceEnterprise({ onContentSelect, onTutorS
               </div>
             </div>
 
-            {/* Courses Grid/List */}
+            {/* Content Grid/List */}
             <div className={viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-4'}>
               {/* Render Courses */}
-              {courses.map((course) => (
+              {displayCourses.map((course) => (
                 <div
                   key={course.id}
                   className={`group bg-white rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-200 cursor-pointer ${
@@ -1124,7 +500,7 @@ export default function ContentMarketplaceEnterprise({ onContentSelect, onTutorS
               ))}
 
               {/* Render Tutors */}
-              {tutors.map((tutor) => (
+              {displayTutors.map((tutor) => (
                 <div
                   key={`tutor-${tutor.id}`}
                   className={`group bg-white rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-200 cursor-pointer ${

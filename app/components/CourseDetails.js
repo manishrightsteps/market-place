@@ -228,11 +228,11 @@ export default function CourseDetails({ course, onBack, onBuyNow }) {
                   <div className="space-y-6">
                     {/* What you'll learn */}
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-4">What you'll learn</h3>
+                      <h3 className="text-xl font-bold text-gray-900 mb-4">What you&apos;ll learn</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         {course.learningPoints?.map((point, index) => (
                           <div key={index} className="flex items-start">
-                            <svg className="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <svg className="w-5 h-5 text-green-600 mr-2 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                             </svg>
                             <span className="text-gray-700">{point}</span>
@@ -300,7 +300,7 @@ export default function CourseDetails({ course, onBack, onBuyNow }) {
                 {activeTab === 'instructor' && (
                   <div className="space-y-4">
                     <div className="flex items-start gap-4">
-                      <div className="w-24 h-24 bg-green-600 rounded-full flex items-center justify-center text-white text-3xl font-bold flex-shrink-0">
+                      <div className="w-24 h-24 bg-green-600 rounded-full flex items-center justify-center text-white text-3xl font-bold shrink-0">
                         {course.instructor.charAt(0)}
                       </div>
                       <div>

@@ -55,7 +55,7 @@ export default function TutorDetails({ tutor, onBack, onBookNow }) {
             <div className="lg:col-span-2">
               <div className="flex items-start gap-4">
                 {/* Profile Photo */}
-                <div className="w-24 h-24 bg-linear-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center text-5xl flex-shrink-0">
+                <div className="w-24 h-24 bg-linear-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center text-5xl shrink-0">
                   {tutor.photo}
                 </div>
 
@@ -248,9 +248,9 @@ export default function TutorDetails({ tutor, onBack, onBookNow }) {
                     <div>
                       <h3 className="text-lg font-bold text-gray-900 mb-3">About Me</h3>
                       <p className="text-gray-700 leading-relaxed text-sm">
-                        Hello! I'm {tutor.name}, and I'm passionate about helping students achieve their academic goals.
-                        With {tutor.experience} of teaching experience, I've developed a teaching style that adapts to each
-                        student's unique learning needs. I believe in making learning engaging and accessible, using real-world
+                        Hello! I&apos;m {tutor.name}, and I&apos;m passionate about helping students achieve their academic goals.
+                        With {tutor.experience} of teaching experience, I&apos;ve developed a teaching style that adapts to each
+                        student&apos;s unique learning needs. I believe in making learning engaging and accessible, using real-world
                         examples and interactive methods to ensure concepts stick.
                       </p>
                     </div>
@@ -260,25 +260,25 @@ export default function TutorDetails({ tutor, onBack, onBookNow }) {
                       <h3 className="text-lg font-bold text-gray-900 mb-3">Teaching Style</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <div className="flex items-start">
-                          <svg className="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-5 h-5 text-green-600 mr-2 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                           </svg>
                           <span className="text-gray-700">Personalized lesson plans</span>
                         </div>
                         <div className="flex items-start">
-                          <svg className="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-5 h-5 text-green-600 mr-2 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                           </svg>
                           <span className="text-gray-700">Interactive learning methods</span>
                         </div>
                         <div className="flex items-start">
-                          <svg className="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-5 h-5 text-green-600 mr-2 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                           </svg>
                           <span className="text-gray-700">Regular progress tracking</span>
                         </div>
                         <div className="flex items-start">
-                          <svg className="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-5 h-5 text-green-600 mr-2 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                           </svg>
                           <span className="text-gray-700">Flexible pacing</span>
@@ -342,19 +342,19 @@ export default function TutorDetails({ tutor, onBack, onBookNow }) {
                       <h3 className="text-xl font-bold text-gray-900 mb-4">Key Achievements</h3>
                       <ul className="space-y-2">
                         <li className="flex items-start text-gray-700">
-                          <svg className="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-5 h-5 text-green-600 mr-2 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                           </svg>
                           <span>Helped over 100 students improve their grades by at least one level</span>
                         </li>
                         <li className="flex items-start text-gray-700">
-                          <svg className="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-5 h-5 text-green-600 mr-2 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                           </svg>
                           <span>Average student satisfaction rating of {tutor.rating}/5.0</span>
                         </li>
                         <li className="flex items-start text-gray-700">
-                          <svg className="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-5 h-5 text-green-600 mr-2 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                           </svg>
                           <span>Completed {tutor.hoursTeaching}+ hours of successful tutoring sessions</span>
