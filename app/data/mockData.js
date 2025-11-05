@@ -4,6 +4,7 @@
 export const courses = [
   {
     id: 1,
+    slug: 'complete-mathematics-mastery',
     name: 'Complete Mathematics Mastery',
     grade: 'Year 8',
     lessons: 25,
@@ -25,6 +26,7 @@ export const courses = [
   },
   {
     id: 2,
+    slug: 'science-fundamentals',
     name: 'Science Fundamentals',
     grade: 'Year 8',
     lessons: 30,
@@ -46,6 +48,7 @@ export const courses = [
   },
   {
     id: 3,
+    slug: 'english-language-excellence',
     name: 'English Language Excellence',
     grade: 'Year 8',
     lessons: 20,
@@ -67,6 +70,7 @@ export const courses = [
   },
   {
     id: 4,
+    slug: 'advanced-mathematics',
     name: 'Advanced Mathematics',
     grade: 'Year 9',
     lessons: 28,
@@ -88,6 +92,7 @@ export const courses = [
   },
   {
     id: 5,
+    slug: 'gcse-physics-preparation',
     name: 'GCSE Physics Preparation',
     grade: 'Year 10',
     lessons: 22,
@@ -109,6 +114,7 @@ export const courses = [
   },
   {
     id: 6,
+    slug: 'chemistry-essentials',
     name: 'Chemistry Essentials',
     grade: 'Year 10',
     lessons: 24,
@@ -130,6 +136,7 @@ export const courses = [
   },
   {
     id: 7,
+    slug: 'introduction-to-algebra',
     name: 'Introduction to Algebra',
     grade: 'Year 7',
     lessons: 18,
@@ -151,6 +158,7 @@ export const courses = [
   },
   {
     id: 8,
+    slug: 'biology-for-gcse',
     name: 'Biology for GCSE',
     grade: 'Year 11',
     lessons: 35,
@@ -172,6 +180,7 @@ export const courses = [
   },
   {
     id: 9,
+    slug: 'creative-writing-workshop',
     name: 'Creative Writing Workshop',
     grade: 'Year 9',
     lessons: 15,
@@ -193,6 +202,7 @@ export const courses = [
   },
   {
     id: 10,
+    slug: 'gcse-mathematics-higher',
     name: 'GCSE Mathematics Higher',
     grade: 'Year 11',
     lessons: 40,
@@ -214,6 +224,7 @@ export const courses = [
   },
   {
     id: 11,
+    slug: 'shakespeare-studies',
     name: 'Shakespeare Studies',
     grade: 'Year 10',
     lessons: 12,
@@ -235,6 +246,7 @@ export const courses = [
   },
   {
     id: 12,
+    slug: 'computer-science-basics',
     name: 'Computer Science Basics',
     grade: 'Year 8',
     lessons: 22,
@@ -256,6 +268,7 @@ export const courses = [
   },
   {
     id: 13,
+    slug: 'french-language-foundation',
     name: 'French Language Foundation',
     grade: 'Year 7',
     lessons: 26,
@@ -277,6 +290,7 @@ export const courses = [
   },
   {
     id: 14,
+    slug: 'history-world-war-ii',
     name: 'History: World War II',
     grade: 'Year 9',
     lessons: 18,
@@ -298,6 +312,7 @@ export const courses = [
   },
   {
     id: 15,
+    slug: 'year-6-sats-preparation-bundle',
     name: 'Year 6 SATs Preparation Bundle',
     grade: 'Year 6',
     lessons: 35,
@@ -319,6 +334,7 @@ export const courses = [
   },
   {
     id: 16,
+    slug: 'spanish-for-beginners',
     name: 'Spanish for Beginners',
     grade: 'Year 7',
     lessons: 24,
@@ -340,6 +356,7 @@ export const courses = [
   },
   {
     id: 17,
+    slug: 'geography-physical-world',
     name: 'Geography: Physical World',
     grade: 'Year 9',
     lessons: 20,
@@ -361,6 +378,7 @@ export const courses = [
   },
   {
     id: 18,
+    slug: 'primary-school-mathematics-foundation',
     name: 'Primary School Mathematics Foundation',
     grade: 'Year 3-5',
     lessons: 30,
@@ -379,16 +397,127 @@ export const courses = [
     lastUpdated: 'October 2024',
     description: 'Build strong mathematical foundations for primary school children with fun, interactive lessons covering times tables, fractions, and problem-solving.',
     learningPoints: ['Times tables mastery', 'Fractions and decimals', 'Mental arithmetic', 'Word problems', 'Shape and space']
+  },
+  {
+    id: 16,
+    slug: 'french-language-foundation',
+    name: 'French Language Foundation',
+    grade: 'Year 7-9',
+    lessons: 28,
+    price: 32.99,
+    rating: 4.8,
+    reviews: 156,
+    image: '🇫🇷',
+    duration: '18 hours',
+    provider: 'rightsteps',
+    providerName: 'Rightsteps',
+    instructor: 'Marie Dubois',
+    badges: ['new'],
+    enrollments: 543,
+    completionRate: 91,
+    difficulty: 'Beginner',
+    lastUpdated: 'November 2024',
+    description: 'Learn French from scratch with engaging lessons covering grammar, vocabulary, and conversational skills.',
+    learningPoints: ['Basic French grammar', 'Essential vocabulary', 'Pronunciation', 'Conversational phrases', 'French culture']
+  },
+  {
+    id: 17,
+    slug: 'creative-writing-workshop',
+    name: 'Creative Writing Workshop',
+    grade: 'Year 8-11',
+    lessons: 22,
+    price: 27.99,
+    rating: 4.9,
+    reviews: 198,
+    image: '✍️',
+    duration: '14 hours',
+    provider: 'rightsteps',
+    providerName: 'Rightsteps',
+    instructor: 'Emma Thompson',
+    badges: ['popular'],
+    enrollments: 672,
+    completionRate: 94,
+    difficulty: 'Intermediate',
+    lastUpdated: 'October 2024',
+    description: 'Unlock your creativity and develop your writing skills with this comprehensive workshop covering various genres and techniques.',
+    learningPoints: ['Story structure', 'Character development', 'Descriptive writing', 'Poetry techniques', 'Editing and revision']
+  },
+  {
+    id: 18,
+    slug: 'introduction-to-music-theory',
+    name: 'Introduction to Music Theory',
+    grade: 'Year 6-10',
+    lessons: 20,
+    price: 29.99,
+    rating: 4.7,
+    reviews: 134,
+    image: '🎵',
+    duration: '12 hours',
+    provider: 'rightsteps',
+    providerName: 'Rightsteps',
+    instructor: 'David Williams',
+    badges: ['new'],
+    enrollments: 421,
+    completionRate: 89,
+    difficulty: 'Beginner',
+    lastUpdated: 'November 2024',
+    description: 'Learn the fundamentals of music theory including notes, scales, rhythm, and composition basics.',
+    learningPoints: ['Reading music notation', 'Scales and keys', 'Rhythm patterns', 'Chord progressions', 'Basic composition']
+  },
+  {
+    id: 19,
+    slug: 'art-techniques-and-creativity',
+    name: 'Art Techniques & Creativity',
+    grade: 'Year 7-11',
+    lessons: 25,
+    price: 34.99,
+    rating: 4.8,
+    reviews: 211,
+    image: '🎨',
+    duration: '16 hours',
+    provider: 'rightsteps',
+    providerName: 'Rightsteps',
+    instructor: 'Sophie Anderson',
+    badges: ['popular'],
+    enrollments: 789,
+    completionRate: 93,
+    difficulty: 'Beginner',
+    lastUpdated: 'October 2024',
+    description: 'Explore various art techniques and develop your creative skills through hands-on projects and guided instruction.',
+    learningPoints: ['Drawing fundamentals', 'Color theory', 'Painting techniques', 'Mixed media', 'Art history basics']
+  },
+  {
+    id: 20,
+    slug: 'drama-and-public-speaking',
+    name: 'Drama & Public Speaking',
+    grade: 'Year 8-11',
+    lessons: 18,
+    price: 26.99,
+    rating: 4.9,
+    reviews: 167,
+    image: '🎭',
+    duration: '11 hours',
+    provider: 'rightsteps',
+    providerName: 'Rightsteps',
+    instructor: 'James Parker',
+    badges: ['trending'],
+    enrollments: 512,
+    completionRate: 95,
+    difficulty: 'Beginner',
+    lastUpdated: 'November 2024',
+    description: 'Build confidence and communication skills through drama exercises and public speaking techniques.',
+    learningPoints: ['Voice projection', 'Body language', 'Presentation skills', 'Improvisation', 'Confidence building']
   }
 ];
 
 export const tutors = [
   {
     id: 1,
+    slug: 'dr-emily-thompson',
     name: 'Dr. Emily Thompson',
     category: 'Mathematics',
     specialization: ['Exam Preparation', 'Homework Help'],
-    experience: '8 years',
+    experience: '8',
     rating: 4.9,
     reviews: 156,
     hourlyRate: 25,
@@ -396,17 +525,21 @@ export const tutors = [
     available: true,
     photo: '👩‍🏫',
     tagline: 'Mathematics Expert',
+    bio: 'Passionate mathematics educator with over 8 years of experience helping students achieve their academic goals. Specialising in GCSE and Year 7-11 mathematics.',
     education: 'Ph.D. in Mathematics, University of Cambridge',
     hoursTeaching: 500,
+    students: 156,
     responseTime: '2 hours',
-    languages: ['English']
+    languages: ['English'],
+    qualifications: ['Ph.D. in Mathematics, University of Cambridge', 'Qualified Teacher Status (QTS)', 'DBS Checked']
   },
   {
     id: 2,
+    slug: 'prof-james-richardson',
     name: 'Prof. James Richardson',
     category: 'Science',
     specialization: ['Exam Preparation', 'Test Preparation'],
-    experience: '12 years',
+    experience: '12',
     rating: 4.8,
     reviews: 203,
     hourlyRate: 30,
@@ -414,17 +547,21 @@ export const tutors = [
     available: false,
     photo: '👨‍🏫',
     tagline: 'Science Specialist',
+    bio: 'Experienced science tutor specialising in Chemistry and Physics for GCSE students. I make complex concepts easy to understand through practical examples.',
     education: 'M.Sc. Chemistry, University of Oxford',
     hoursTeaching: 800,
+    students: 203,
     responseTime: '1 hour',
-    languages: ['English', 'French']
+    languages: ['English', 'French'],
+    qualifications: ['M.Sc. Chemistry, University of Oxford', 'B.Sc. Physics', 'DBS Checked', 'Qualified Teacher Status (QTS)']
   },
   {
     id: 3,
+    slug: 'ms-sarah-collins',
     name: 'Ms. Sarah Collins',
     category: 'English',
     specialization: ['Homework Help', 'Confidence Building'],
-    experience: '6 years',
+    experience: '6',
     rating: 4.7,
     reviews: 98,
     hourlyRate: 22,
@@ -432,13 +569,17 @@ export const tutors = [
     available: true,
     photo: '👩‍💼',
     tagline: 'English Language Expert',
+    bio: 'Dedicated English tutor focused on building confidence and improving literacy skills. Experienced in helping students with reading comprehension and creative writing.',
     education: 'M.A. English Literature, King\'s College London',
     hoursTeaching: 300,
+    students: 98,
     responseTime: '30 minutes',
-    languages: ['English']
+    languages: ['English'],
+    qualifications: ['M.A. English Literature, King\'s College London', 'B.A. English Language', 'TEFL Certified']
   },
   {
     id: 4,
+    slug: 'mr-oliver-davies',
     name: 'Mr. Oliver Davies',
     category: 'Mathematics',
     specialization: ['General Tutoring', 'Exam Preparation'],
@@ -457,6 +598,7 @@ export const tutors = [
   },
   {
     id: 5,
+    slug: 'dr-amelia-watson',
     name: 'Dr. Amelia Watson',
     category: 'Science',
     specialization: ['Exam Preparation', 'General Tutoring'],
@@ -475,6 +617,7 @@ export const tutors = [
   },
   {
     id: 6,
+    slug: 'mr-benjamin-clarke',
     name: 'Mr. Benjamin Clarke',
     category: 'English',
     specialization: ['Confidence Building', 'General Tutoring'],
@@ -493,6 +636,7 @@ export const tutors = [
   },
   {
     id: 7,
+    slug: 'ms-charlotte-brown',
     name: 'Ms. Charlotte Brown',
     category: 'Science',
     specialization: ['Exam Preparation', 'Test Preparation'],
@@ -511,6 +655,7 @@ export const tutors = [
   },
   {
     id: 8,
+    slug: 'dr-daniel-martinez',
     name: 'Dr. Daniel Martinez',
     category: 'Science',
     specialization: ['Exam Preparation', 'Homework Help'],
@@ -529,6 +674,7 @@ export const tutors = [
   },
   {
     id: 9,
+    slug: 'ms-jessica-lee',
     name: 'Ms. Jessica Lee',
     category: 'English',
     specialization: ['Confidence Building', 'General Tutoring'],
@@ -547,6 +693,7 @@ export const tutors = [
   },
   {
     id: 10,
+    slug: 'mr-thomas-wilson',
     name: 'Mr. Thomas Wilson',
     category: 'Science',
     specialization: ['Test Preparation', 'Homework Help'],
@@ -565,6 +712,7 @@ export const tutors = [
   },
   {
     id: 11,
+    slug: 'ms-rachel-green',
     name: 'Ms. Rachel Green',
     category: 'Mathematics',
     specialization: ['Homework Help', 'Confidence Building'],
@@ -583,6 +731,7 @@ export const tutors = [
   },
   {
     id: 12,
+    slug: 'dr-michael-foster',
     name: 'Dr. Michael Foster',
     category: 'Mathematics',
     specialization: ['Exam Preparation', 'Test Preparation'],
@@ -598,12 +747,143 @@ export const tutors = [
     hoursTeaching: 720,
     responseTime: '1 hour',
     languages: ['English']
+  },
+  {
+    id: 18,
+    slug: 'marie-dubois',
+    name: 'Marie Dubois',
+    category: 'Beyond Books',
+    specialization: ['French Language', 'General Tutoring'],
+    experience: '7 years',
+    rating: 4.8,
+    reviews: 142,
+    hourlyRate: 28,
+    verified: true,
+    available: true,
+    photo: '👩‍🏫',
+    tagline: 'Native French Speaker & Language Expert',
+    bio: 'Native French teacher with 7 years of experience teaching French to UK students. Specializing in conversational French and exam preparation.',
+    education: 'BA French Literature, Sorbonne University',
+    hoursTeaching: 420,
+    students: 142,
+    responseTime: '2 hours',
+    languages: ['French', 'English'],
+    qualifications: [
+      'BA French Literature, Sorbonne University',
+      'PGCE Modern Foreign Languages',
+      'DBS Checked'
+    ]
+  },
+  {
+    id: 19,
+    slug: 'emma-thompson',
+    name: 'Emma Thompson',
+    category: 'Beyond Books',
+    specialization: ['Creative Writing', 'Confidence Building'],
+    experience: '9 years',
+    rating: 4.9,
+    reviews: 187,
+    hourlyRate: 30,
+    verified: true,
+    available: true,
+    photo: '✍️',
+    tagline: 'Published Author & Writing Coach',
+    bio: 'Award-winning author and creative writing tutor helping students discover their unique voice and develop their storytelling skills.',
+    education: 'MA Creative Writing, University of East Anglia',
+    hoursTeaching: 560,
+    students: 187,
+    responseTime: '1 hour',
+    languages: ['English'],
+    qualifications: [
+      'MA Creative Writing, University of East Anglia',
+      'Published Author (3 novels)',
+      'DBS Checked'
+    ]
+  },
+  {
+    id: 20,
+    slug: 'david-williams',
+    name: 'David Williams',
+    category: 'Beyond Books',
+    specialization: ['Music Theory', 'General Tutoring'],
+    experience: '12 years',
+    rating: 4.7,
+    reviews: 98,
+    hourlyRate: 32,
+    verified: true,
+    available: false,
+    photo: '🎵',
+    tagline: 'Professional Musician & Music Educator',
+    bio: 'Professional musician and experienced music teacher specializing in music theory, composition, and performance guidance.',
+    education: 'BMus Performance, Royal College of Music',
+    hoursTeaching: 680,
+    students: 98,
+    responseTime: '3 hours',
+    languages: ['English'],
+    qualifications: [
+      'BMus Performance, Royal College of Music',
+      'ABRSM Grade 8 Theory & Performance',
+      'DBS Checked'
+    ]
+  },
+  {
+    id: 21,
+    slug: 'sophie-anderson',
+    name: 'Sophie Anderson',
+    category: 'Beyond Books',
+    specialization: ['Art & Design', 'Confidence Building'],
+    experience: '8 years',
+    rating: 4.8,
+    reviews: 156,
+    hourlyRate: 27,
+    verified: true,
+    available: true,
+    photo: '🎨',
+    tagline: 'Professional Artist & Art Educator',
+    bio: 'Professional artist with 8 years of teaching experience, passionate about helping students explore their creativity and develop technical skills.',
+    education: 'BA Fine Arts, Central Saint Martins',
+    hoursTeaching: 450,
+    students: 156,
+    responseTime: '2 hours',
+    languages: ['English'],
+    qualifications: [
+      'BA Fine Arts, Central Saint Martins',
+      'Art Teaching Certificate',
+      'DBS Checked'
+    ]
+  },
+  {
+    id: 22,
+    slug: 'james-parker',
+    name: 'James Parker',
+    category: 'Beyond Books',
+    specialization: ['Drama', 'Confidence Building'],
+    experience: '10 years',
+    rating: 4.9,
+    reviews: 143,
+    hourlyRate: 29,
+    verified: true,
+    available: true,
+    photo: '🎭',
+    tagline: 'Theatre Director & Drama Coach',
+    bio: 'Experienced theatre director and drama coach specializing in public speaking, confidence building, and performance skills for young people.',
+    education: 'BA Drama, Royal Central School of Speech and Drama',
+    hoursTeaching: 600,
+    students: 143,
+    responseTime: '1 hour',
+    languages: ['English'],
+    qualifications: [
+      'BA Drama, Royal Central School of Speech and Drama',
+      'LAMDA Teaching Diploma',
+      'DBS Checked'
+    ]
   }
 ];
 
 export const categories = [
-  { name: 'All', count: 18, icon: '📚' },
+  { name: 'All', count: 37, icon: '📚' },
   { name: 'Mathematics', count: 5, icon: '📐' },
   { name: 'Science', count: 5, icon: '🔬' },
   { name: 'English', count: 3, icon: '📖' },
+  { name: 'Beyond Books', count: 10, icon: '🎨' },
 ];

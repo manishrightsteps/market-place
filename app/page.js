@@ -1,27 +1,25 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Marketplace from './components/Marketplace';
-import CourseDetails from './components/CourseDetails';
-import TutorDetails from './components/TutorDetails';
 import PurchaseModal from './components/PurchaseModal';
 import AISearch from './components/AISearch';
 
 export default function Home() {
+  const router = useRouter();
   const [selectedItem, setSelectedItem] = useState(null);
-  const [viewType, setViewType] = useState('marketplace'); // 'marketplace', 'courseDetails', 'tutorDetails'
   const [showPurchaseModal, setShowPurchaseModal] = useState(false);
-  const [purchaseType, setPurchaseType] = useState('course'); // 'course' or 'tutor'
+  const [purchaseType, setPurchaseType] = useState('content');
   const [showAISearch, setShowAISearch] = useState(false);
 
   const handleContentSelect = (content, action) => {
     if (action === 'buy') {
       setSelectedItem(content);
-      setPurchaseType('course');
+      setPurchaseType('content');
       setShowPurchaseModal(true);
     } else if (action === 'view') {
-      setSelectedItem(content);
-      setViewType('courseDetails');
+      router.push(`/courses/${content.slug}`);
     }
   };
 
@@ -31,51 +29,10 @@ export default function Home() {
       setPurchaseType('tutor');
       setShowPurchaseModal(true);
     } else if (action === 'view') {
-      setSelectedItem(tutor);
-      setViewType('tutorDetails');
+      router.push(`/tutors/${tutor.slug}`);
     }
   };
 
-  const handleBackToMarketplace = () => {
-    setViewType('marketplace');
-    setSelectedItem(null);
-  };
-
-  const handleCourseDetailsBuy = (course) => {
-    setSelectedItem(course);
-    setPurchaseType('course');
-    setShowPurchaseModal(true);
-  };
-
-  const handleTutorDetailsBook = (tutor) => {
-    setSelectedItem(tutor);
-    setPurchaseType('tutor');
-    setShowPurchaseModal(true);
-  };
-
-  // Show Course Details page
-  if (viewType === 'courseDetails' && selectedItem) {
-    return (
-      <CourseDetails
-        course={selectedItem}
-        onBack={handleBackToMarketplace}
-        onBuyNow={handleCourseDetailsBuy}
-      />
-    );
-  }
-
-  // Show Tutor Details page
-  if (viewType === 'tutorDetails' && selectedItem) {
-    return (
-      <TutorDetails
-        tutor={selectedItem}
-        onBack={handleBackToMarketplace}
-        onBookNow={handleTutorDetailsBook}
-      />
-    );
-  }
-
-  // Show main marketplace
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -96,16 +53,6 @@ export default function Home() {
                 </svg>
                 <span>Find your fit with AI</span>
                 <span className="text-xs bg-white/20 px-2 py-0.5 rounded">✨</span>
-              </button>
-
-              {/* Regular Search Icon */}
-              <button
-                onClick={() => setShowAISearch(true)}
-                className="p-2 text-gray-600 hover:text-gray-900 transition-colors"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
               </button>
             </div>
           </div>

@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { courses as mockCourses, tutors as mockTutors, categories } from '../data/mockData';
+import { useState, useEffect } from 'react';
+import { categories } from '../data/mockData';
 
 export default function Marketplace({ onContentSelect, onTutorSelect }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -9,6 +9,12 @@ export default function Marketplace({ onContentSelect, onTutorSelect }) {
   const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
   const [sortBy, setSortBy] = useState('popular');
   const [selectedType, setSelectedType] = useState('courses'); // 'courses', 'tutors', 'all'
+
+  // Data state
+  const [courses, setCourses] = useState([]);
+  const [tutors, setTutors] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   // Course filters
   const [selectedRatings, setSelectedRatings] = useState([]);
@@ -21,11 +27,54 @@ export default function Marketplace({ onContentSelect, onTutorSelect }) {
   const [selectedExperience, setSelectedExperience] = useState([]);
   const [selectedPriceRanges, setSelectedPriceRanges] = useState([]);
 
+  // Fetch data from API on component mount
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const [coursesResponse, tutorsResponse] = await Promise.all([
+          fetch('/api/courses'),
+          fetch('/api/tutors')
+        ]);
+
+        const coursesData = await coursesResponse.json();
+        const tutorsData = await tutorsResponse.json();
+
+        if (coursesData.success) {
+          setCourses(coursesData.data.courses);
+        }
+        if (tutorsData.success) {
+          setTutors(tutorsData.data.tutors);
+        }
+      } catch (err) {
+        setError('Failed to load marketplace data');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   // Filter courses
-  const filteredCourses = mockCourses.filter(course => {
+  const filteredCourses = courses.filter(course => {
     const matchesSearch = course.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
            course.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'All' || course.name.includes(selectedCategory);
+
+    // Category matching logic
+    let matchesCategory = false;
+    if (selectedCategory === 'All') {
+      matchesCategory = true;
+    } else if (selectedCategory === 'Beyond Books') {
+      // Beyond Books: courses that don't contain traditional subject names
+      const isTraditionalSubject = course.name.includes('Mathematics') ||
+                                   course.name.includes('Science') ||
+                                   course.name.includes('English');
+      matchesCategory = !isTraditionalSubject;
+    } else {
+      matchesCategory = course.name.includes(selectedCategory);
+    }
 
     const matchesRating = selectedRatings.length === 0 ||
       selectedRatings.some(rating => course.rating >= rating);
@@ -52,7 +101,7 @@ export default function Marketplace({ onContentSelect, onTutorSelect }) {
   });
 
   // Filter tutors
-  const filteredTutors = mockTutors.filter(tutor => {
+  const filteredTutors = tutors.filter(tutor => {
     const matchesSearch = tutor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       tutor.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
       tutor.tagline.toLowerCase().includes(searchTerm.toLowerCase());
@@ -392,12 +441,36 @@ export default function Marketplace({ onContentSelect, onTutorSelect }) {
               </div>
             </div>
 
+            {/* Loading State */}
+            {loading && (
+              <div className="flex items-center justify-center py-12">
+                <div className="text-center">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
+                  <p className="text-gray-600">Loading marketplace...</p>
+                </div>
+              </div>
+            )}
+
+            {/* Error State */}
+            {error && !loading && (
+              <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+                <p className="text-red-600 font-medium">{error}</p>
+                <button
+                  onClick={() => window.location.reload()}
+                  className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                >
+                  Retry
+                </button>
+              </div>
+            )}
+
             {/* Content Grid/List */}
-            <div className={viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-4'}>
-              {/* Render Courses */}
-              {displayCourses.map((course) => (
+            {!loading && !error && (
+              <div className={viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-4'}>
+                {/* Render Courses */}
+                {displayCourses.map((course) => (
                 <div
-                  key={course.id}
+                  key={`course-${course.id}`}
                   className={`group bg-white rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-200 cursor-pointer ${
                     viewMode === 'list' ? 'flex' : ''
                   }`}
@@ -607,7 +680,8 @@ export default function Marketplace({ onContentSelect, onTutorSelect }) {
                   </div>
                 </div>
               ))}
-            </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

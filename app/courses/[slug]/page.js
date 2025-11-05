@@ -1,13 +1,42 @@
 'use client';
 
-import { useState } from 'react';
-import PurchaseModal from './PurchaseModal';
+import { useEffect, useState } from 'react';
+import { useRouter, useParams } from 'next/navigation';
+import PurchaseModal from '@/app/components/PurchaseModal';
 
-export default function CourseDetails({ course, onBack, onBuyNow }) {
+export default function CoursePage() {
+  const router = useRouter();
+  const params = useParams();
+  const [course, setCourse] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState('overview');
   const [showPurchaseModal, setShowPurchaseModal] = useState(false);
 
-  if (!course) return null;
+  useEffect(() => {
+    const fetchCourse = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`/api/courses/${params.slug}`);
+        const data = await response.json();
+
+        if (data.success) {
+          setCourse(data.data.course);
+        } else {
+          setError(data.message);
+        }
+      } catch (err) {
+        setError('Failed to fetch course details');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (params.slug) {
+      fetchCourse();
+    }
+  }, [params.slug]);
 
   const handleBuyNowClick = () => {
     setShowPurchaseModal(true);
@@ -17,6 +46,34 @@ export default function CourseDetails({ course, onBack, onBuyNow }) {
     setShowPurchaseModal(false);
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-linear-to-b from-green-50 to-blue-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading course details...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !course) {
+    return (
+      <div className="min-h-screen bg-linear-to-b from-green-50 to-blue-50 flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Course Not Found</h2>
+          <p className="text-gray-600 mb-4">{error || 'The course you are looking for does not exist.'}</p>
+          <button
+            onClick={() => router.push('/')}
+            className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+          >
+            Back to Marketplace
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Navigation Bar */}
@@ -24,7 +81,7 @@ export default function CourseDetails({ course, onBack, onBuyNow }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center h-16">
             <button
-              onClick={onBack}
+              onClick={() => router.push('/')}
               className="flex items-center text-gray-600 hover:text-gray-900 transition-colors"
             >
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -101,7 +158,7 @@ export default function CourseDetails({ course, onBack, onBuyNow }) {
 
             {/* Right Column - Purchase Card */}
             <div className="lg:col-span-1">
-              <div className="bg-white rounded-lg shadow-xl overflow-hidden sticky top-20">
+              <div className="bg-white rounded-lg shadow-xl overflow-hidden">
                 {/* Preview Image */}
                 <div className={`bg-linear-to-br ${
                   course.provider === 'rightsteps'
