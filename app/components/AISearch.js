@@ -1,8 +1,10 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function AISearch({ isOpen, onClose }) {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -77,6 +79,29 @@ export default function AISearch({ isOpen, onClose }) {
   const handleSuggestionClick = (suggestion) => {
     setSearchQuery(suggestion);
     handleSearch(suggestion);
+  };
+
+  const handleCourseClick = (courseSlug) => {
+    onClose();
+    router.push(`/courses/${courseSlug}`);
+  };
+
+  const handleTutorClick = (tutorSlug) => {
+    onClose();
+    router.push(`/tutors/${tutorSlug}`);
+  };
+
+  // Function to render markdown bold text (**text** -> <strong>text</strong>)
+  const renderMarkdown = (text) => {
+    if (!text) return null;
+
+    const parts = text.split(/(\*\*[^*]+\*\*)/g);
+    return parts.map((part, index) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <strong key={index}>{part.slice(2, -2)}</strong>;
+      }
+      return part;
+    });
   };
 
   if (!isOpen) return null;
@@ -212,9 +237,9 @@ export default function AISearch({ isOpen, onClose }) {
                     </div>
                     <div className="flex-1">
                       <h3 className="text-sm font-semibold text-green-900 mb-2">AI Recommendation</h3>
-                      <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
-                        {searchResults.aiSuggestion}
-                      </p>
+                      <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
+                        {renderMarkdown(searchResults.aiSuggestion)}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -232,7 +257,11 @@ export default function AISearch({ isOpen, onClose }) {
                     <h4 className="text-sm font-semibold text-gray-900 mb-3">📚 Recommended Courses</h4>
                     <div className="space-y-3">
                       {searchResults.courses.map((course) => (
-                        <div key={course.id} className="p-4 border border-gray-200 rounded-lg hover:border-green-300 hover:shadow-md transition-all cursor-pointer">
+                        <div
+                          key={course.id}
+                          onClick={() => handleCourseClick(course.slug)}
+                          className="p-4 border border-gray-200 rounded-lg hover:border-green-300 hover:shadow-md transition-all cursor-pointer"
+                        >
                           <div className="flex items-start justify-between">
                             <div className="flex-1">
                               <h5 className="font-semibold text-gray-900 mb-1">{course.name}</h5>
@@ -261,7 +290,11 @@ export default function AISearch({ isOpen, onClose }) {
                     <h4 className="text-sm font-semibold text-gray-900 mb-3">👨‍🏫 Recommended Tutors</h4>
                     <div className="space-y-3">
                       {searchResults.tutors.map((tutor) => (
-                        <div key={tutor.id} className="p-4 border border-gray-200 rounded-lg hover:border-green-300 hover:shadow-md transition-all cursor-pointer">
+                        <div
+                          key={tutor.id}
+                          onClick={() => handleTutorClick(tutor.slug)}
+                          className="p-4 border border-gray-200 rounded-lg hover:border-green-300 hover:shadow-md transition-all cursor-pointer"
+                        >
                           <div className="flex items-start justify-between">
                             <div className="flex-1">
                               <div className="flex items-center gap-2 mb-1">
